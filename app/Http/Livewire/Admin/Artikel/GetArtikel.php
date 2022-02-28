@@ -37,6 +37,8 @@ class GetArtikel extends Component
 
     public function render()
     {
-        return view('livewire.admin.artikel.get-artikel');
+        return view('livewire.admin.artikel.get-artikel')
+            ->extends('layouts.admin')
+            ->slot('slot');
     }
 }

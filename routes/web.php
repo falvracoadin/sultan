@@ -1,5 +1,11 @@
 <?php
 
+use App\Http\Controllers\LoginController;
+use App\Http\Livewire\Admin\Artikel\CreateArtikel;
+use App\Http\Livewire\Admin\Artikel\CreateKategoriArtikel;
+use App\Http\Livewire\Admin\Artikel\GetArtikel;
+use App\Http\Livewire\Admin\Artikel\GetKategoriArtikel;
+use App\Http\Livewire\Admin\Artikel\UpdateArtikel;
 use App\Http\Livewire\ArtikelController;
 use App\Http\Livewire\CareerController;
 use App\Http\Livewire\ContactUsController;
@@ -9,6 +15,8 @@ use App\Http\Livewire\LatestBriefController;
 use App\Http\Livewire\LatestReportController;
 use App\Http\Livewire\PortofolioController;
 use App\Http\Livewire\WorkingPaperController;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,7 +31,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/test', function(){
-    return view('layouts.app');
+});
+
+ROute::prefix('admin')->middleware(['auth'])->group(function(){
+    Route::get('/artikel', GetArtikel::class);
+    Route::get('/artikel/create',CreateArtikel::class);
+    Route::get('/artikel/{artikel}', UpdateArtikel::class);
+    
+    Route::get('/kategori-artikel', GetKategoriArtikel::class);
+    Route::get('/kategori-artikel/create', CreateKategoriArtikel::class);
 });
 
 Route::get('/', HomeController::class);
@@ -45,6 +61,13 @@ Route::get('/artikel/{artikel}', DetailArtikel::class);
 Route::get('/career', CareerController::class);
 
 Route::get('/contact', ContactUsController::class);
+
+Route::get('/login', [LoginController::class, 'index'])
+    ->name('login')
+    ->middleware('guest');
+
+Route::post('/login', [LoginController::class, 'login'])
+    ->middleware('guest');
 
 Route::fallback(function(){
     abort(404);

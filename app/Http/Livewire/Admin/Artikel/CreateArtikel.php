@@ -45,6 +45,8 @@ class CreateArtikel extends Component
 
     public function render()
     {
-        return view('livewire.admin.artikel.create-artikel');
+        return view('livewire.admin.artikel.create-artikel')
+            ->extends('layouts.admin')
+            ->slot('slot');
     }
 }
