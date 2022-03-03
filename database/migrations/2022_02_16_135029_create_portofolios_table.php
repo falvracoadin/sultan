@@ -20,7 +20,7 @@ return new class extends Migration
             $table->date('date');
             $table->string('kategori',50);
             $table->string('file',255);
-            $table->boolean('show')->default(false);
+            $table->boolean('show')->default(true);
             $table->string('tipe',50)->nullable();
             $table->timestamps();
         });

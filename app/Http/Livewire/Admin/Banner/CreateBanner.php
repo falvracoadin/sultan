@@ -9,7 +9,7 @@ class CreateBanner extends Component
     public $nama_app, $deskripsi, $file;
     public function mount()
     {
-        //auth
+        
     } 
 
     public function create()

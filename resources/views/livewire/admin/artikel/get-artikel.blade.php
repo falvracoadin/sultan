@@ -1,188 +1,150 @@
 <div>
+    <style wire:ignore>
+        .green{
+            background-color: #00CCCC;
+            color: white;
+        }
+    </style>
     <div class="container-fluid">
         <main class="tm-main">
             <!-- Search form -->
-            <div class="row tm-row">
+            <div wire:ignore class="row tm-row">
                 <div class="col-12">
-                    <form method="GET" class="form-inline tm-mb-80 tm-search-form">                
-                        <input class="form-control tm-search-input" name="query" type="text" placeholder="Search..." aria-label="Search">
-                        <button class="tm-search-button" type="submit">
-                            <i class="fas fa-search tm-search-icon" aria-hidden="true"></i>
-                        </button>                                
+                    <form id="myform" class="form-inline tm-mb-80 tm-search-form">                
+                        <input wire:model.debounce.500ms='keyword' class="form-control tm-search-input" name="query" type="text" placeholder="Search..." aria-label="Search">                              
                     </form>
-                </div>                
-            </div>            
+                </div>                  
+            </div>   
+            <div wire:ignore class="row tm-row">
+                <div class="col-md-6">
+                    <a wire:click="addArtikel"><button type="button" class="btn green">Tambah Artikel</button></a>
+                </div>    
+                <div class="col-md-6">
+                    <a wire:click='addKategori'><button type="button" class="btn green">Tambah Kategori Artikel</button></a>
+                </div>
+            </div>         
             <div class="row tm-row">
+                @foreach($artikels as $ind => $art)
                 <article class="col-12 col-md-6 tm-post">
                     <hr class="tm-hr-primary">
-                    <a href="post.html" class="effect-lily tm-post-link tm-pt-60">
+                    <a class="effect-lily tm-post-link tm-pt-60">
                         <div class="tm-post-link-inner">
-                            <img src="img/img-01.jpg" alt="Image" class="img-fluid">                            
+                            <img src="{{asset($art['gambar'] == null ? 'admin/img/img-01.jpg' : 'storage/'.$art['gambar'])}}" alt="Image" class="img-fluid">                            
                         </div>
-                        <span class="position-absolute tm-new-badge">New</span>
-                        <h2 class="tm-pt-30 tm-color-primary tm-post-title">Simple and useful HTML layout</h2>
-                    </a>                    
-                    <p class="tm-pt-30">
-                        There is a clickable image with beautiful hover effect and active title link for each post item. 
-                        Left side is a sticky menu bar. Right side is a blog content that will scroll up and down.
-                    </p>
-                    <div class="d-flex justify-content-between tm-pt-45">
-                        <span class="tm-color-primary">Travel . Events</span>
-                        <span class="tm-color-primary">June 24, 2020</span>
-                    </div>
-                    <hr>
-                    <div class="d-flex justify-content-between">
-                        <span>36 comments</span>
-                        <span>by Admin Nat</span>
+                        <span wire:click='delete({{$art['id']}})' class="position-absolute tm-new-badge">delete</span>
+                        <h2 wire:click="showUpdateArtikel({{$art['id']}})"  class="tm-pt-30 tm-color-primary tm-post-title">{{$art['nama_artikel']}}</h2>
+                    </a>
+                    <div wire:click="showUpdateArtikel({{$art['id']}})" style="cursor: pointer;">             
+                        <p class="tm-pt-30">
+                            {{substr($art['deskripsi'], 0, 200)}}
+                        </p>
+                        <div class="d-flex justify-content-between tm-pt-45">
+                            <span class="tm-color-primary">{{$art['kategori']}}</span>
+                            <span class="tm-color-primary">{{date('d M Y', strtotime($art['tanggal_terbit']))}}</span>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-between">
+                            <span>{{$numComment[$ind]['jumlah']}} comments</span>
+                            <span>by {{$penulis[$ind]['nama_staff']}}</span>
+                        </div>
                     </div>
                 </article>
-                <article class="col-12 col-md-6 tm-post">
-                    <hr class="tm-hr-primary">
-                    <a href="post.html" class="effect-lily tm-post-link tm-pt-60">
-                        <div class=" tm-post-link-inner">
-                            <img src="img/img-02.jpg" alt="Image" class="img-fluid">                            
-                        </div>
-                        <span class="position-absolute tm-new-badge">New</span>
-                        <h2 class="tm-pt-30 tm-color-primary tm-post-title">Multi-purpose blog template</h2>
-                    </a>                    
-                    <p class="tm-pt-30">
-                        <a rel="nofollow" href="https://templatemo.com/tm-553-xtra-blog" target="_blank">Xtra Blog</a>  is a multi-purpose HTML CSS template from TemplateMo website. 
-                        Blog list, single post, about, contact pages are included. Left sidebar fixed width and content area is a fluid full-width.
-                    </p>
-                    <div class="d-flex justify-content-between tm-pt-45">
-                        <span class="tm-color-primary">Creative . Design . Business</span>
-                        <span class="tm-color-primary">June 16, 2020</span>
-                    </div>
-                    <hr>
-                    <div class="d-flex justify-content-between">
-                        <span>48 comments</span>
-                        <span>by Admin Sam</span>
-                    </div>
-                </article>
-                <article class="col-12 col-md-6 tm-post">
-                    <hr class="tm-hr-primary">
-                    <a href="post.html" class="effect-lily tm-post-link tm-pt-20">
-                        <div class="tm-post-link-inner">
-                            <img src="img/img-03.jpg" alt="Image" class="img-fluid">
-                        </div>
-                        <h2 class="tm-pt-30 tm-color-primary tm-post-title">How can you apply Xtra Blog</h2>
-                    </a>                    
-                    <p class="tm-pt-30">
-                        You are <u>allowed</u> to convert this template as any kind of CMS theme or template for your custom website builder. 
-                        You can also use this for your clients. Thank you for choosing us.
-                    </p>
-                    <div class="d-flex justify-content-between tm-pt-45">
-                        <span class="tm-color-primary">Music . Audio</span>
-                        <span class="tm-color-primary">June 11, 2020</span>
-                    </div>
-                    <hr>
-                    <div class="d-flex justify-content-between">
-                        <span>24 comments</span>
-                        <span>by John Walker</span>
-                    </div>
-                </article>
-                <article class="col-12 col-md-6 tm-post">
-                    <hr class="tm-hr-primary">
-                    <a href="post.html" class="effect-lily tm-post-link tm-pt-20">
-                        <div class="tm-post-link-inner">
-                            <img src="img/img-04.jpg" alt="Image" class="img-fluid">
-                        </div>
-                        <h2 class="tm-pt-30 tm-color-primary tm-post-title">A little restriction to apply</h2>
-                    </a>                    
-                    <p class="tm-pt-30">
-                        You are <u>not allowed</u> to re-distribute this template as a downloadable ZIP file on any template collection
-                        website. This is strongly prohibited as we worked hard for this template. Please contact TemplateMo for more information.
-                		<br>For example, <a href="https://www.free-css.com/free-css-templates/page272/xtra-blog" target="_blank">Free-CSS</a> redistributed this Xtra Blog template on their website without asking any permission. It is an illegal act by Free-CSS website doing an unauthorized reposting.</p>
-                    <div class="d-flex justify-content-between tm-pt-45">
-                        <span class="tm-color-primary">Artworks . Design</span>
-                        <span class="tm-color-primary">June 4, 2020</span>
-                    </div>
-                    <hr>
-                    <div class="d-flex justify-content-between">
-                        <span>72 comments</span>
-                        <span>by Admin Sam</span>
-                    </div>
-                </article>
-                <article class="col-12 col-md-6 tm-post">
-                    <hr class="tm-hr-primary">
-                    <a href="post.html" class="effect-lily tm-post-link tm-pt-20">
-                        <div class="tm-post-link-inner">
-                            <img src="img/img-05.jpg" alt="Image" class="img-fluid">
-                        </div>
-                        <h2 class="tm-pt-30 tm-color-primary tm-post-title">Color hexa values of Xtra Blog</h2>
-                    </a>                    
-                    <p class="tm-pt-30">
-                        If you wish to kindly support us, please contact us or contribute a small PayPal amount to info [at] templatemo.com that is helpful for us.
-                        <br>
-                        Title #099 New #0CC <br>
-                        <span class="tm-color-primary">Text #999 Line #CCC Next #0CC Prev #F0F0F0</span>
-                    </p>
-                    <div class="d-flex justify-content-between tm-pt-45">
-                        <span class="tm-color-primary">Creative . Video . Audio</span>
-                        <span class="tm-color-primary">May 31, 2020</span>
-                    </div>
-                    <hr>
-                    <div class="d-flex justify-content-between">
-                        <span>84 comments</span>
-                        <span>by Admin Sam</span>
-                    </div>
-                </article>
-                <article class="col-12 col-md-6 tm-post">
-                    <hr class="tm-hr-primary">
-                    <a href="post.html" class="effect-lily tm-post-link tm-pt-20">
-                        <div class="tm-post-link-inner">
-                            <img src="img/img-06.jpg" alt="Image" class="img-fluid">
-                        </div>
-                        <h2 class="tm-pt-30 tm-color-primary tm-post-title">Donec convallis varius risus</h2>
-                    </a>                    
-                    <p class="tm-pt-30">
-                        Quisque id ipsum vel sem maximus vulputate sed quis velit. Nunc vel turpis eget orci elementum cursus vitae in eros. Quisque vulputate nulla ut dolor consectetur luctus.
-                    </p>
-                    <div class="d-flex justify-content-between tm-pt-45">
-                        <span class="tm-color-primary">Visual . Artworks</span>
-                        <span class="tm-color-primary">June 16, 2020</span>
-                    </div>
-                    <hr>
-                    <div class="d-flex justify-content-between">
-                        <span>96 comments</span>
-                        <span>by Admin Sam</span>
-                    </div>
-                </article>
+                @endforeach
             </div>
             <div class="row tm-row tm-mt-100 tm-mb-75">
                 <div class="tm-prev-next-wrapper">
-                    <a href="#" class="mb-2 tm-btn tm-btn-primary tm-prev-next disabled tm-mr-20">Prev</a>
-                    <a href="#" class="mb-2 tm-btn tm-btn-primary tm-prev-next">Next</a>
+                    @if($maxPage > 1)
+                        <a href="#" wire:click="getPage({{$currentPage - 1}})" class="mb-2 tm-btn tm-btn-primary tm-prev-next disabled tm-mr-20">Prev</a>
+                        <a href="#" wire:click="getPage({{$currentPage + 1}})" class="mb-2 tm-btn tm-btn-primary tm-prev-next">Next</a>
+                    @endif
                 </div>
                 <div class="tm-paging-wrapper">
                     <span class="d-inline-block mr-3">Page</span>
                     <nav class="tm-paging-nav d-inline-block">
                         <ul>
-                            <li class="tm-paging-item active">
-                                <a href="#" class="mb-2 tm-btn tm-paging-link">1</a>
-                            </li>
-                            <li class="tm-paging-item">
-                                <a href="#" class="mb-2 tm-btn tm-paging-link">2</a>
-                            </li>
-                            <li class="tm-paging-item">
-                                <a href="#" class="mb-2 tm-btn tm-paging-link">3</a>
-                            </li>
-                            <li class="tm-paging-item">
-                                <a href="#" class="mb-2 tm-btn tm-paging-link">4</a>
-                            </li>
+                            @if($maxPage < 3)
+                                @for($i = 0; $i < $maxPage; $i++)
+                                    <li class="tm-paging-item {{$currentPage == $i ? 'active' : ''}}">
+                                        <a wire:click="getPage({{$i}})" class="mb-2 tm-btn tm-paging-link">{{$i+1}}</a>
+                                    </li>
+                                @endfor
+                            @elseif($currentPage < 3)
+                                @for($i = 0; $i < 3; $i++)
+                                    <li class="tm-paging-item {{$currentPage == $i ? 'active' : ''}}">
+                                        <a wire:click="getPage({{$i}})" class="mb-2 tm-btn tm-paging-link">{{$i+1}}</a>
+                                    </li>
+                                @endfor
+                                <li class="tm-paging-item">
+                                    <a class="mb-2 tm-btn tm-paging-link">...</a>
+                                </li>
+                                <li class="tm-paging-item">
+                                    <a wire:click="getPage({{$maxPage - 1}})" class="mb-2 tm-btn tm-paging-link">{{$maxPage}}</a>
+                                </li>
+                            @elseif($currentPage >= 3 and $currentPage < $maxPage - 3)
+                                <li class="tm-paging-item">
+                                    <a wire:click="getPage(0)" class="mb-2 tm-btn tm-paging-link">1</a>
+                                </li>
+                                <li class="tm-paging-item">
+                                    <a class="mb-2 tm-btn tm-paging-link">...</a>
+                                </li>
+                                @for($i = $currentPage - 1; $i < $currentPage + 2; $i++)
+                                    <li class="tm-paging-item {{$currentPage == $i ? 'active' : ''}}">
+                                        <a wire:click="getPage({{$i}})" class="mb-2 tm-btn tm-paging-link">{{$i+1}}</a>
+                                    </li>
+                                @endfor
+                                <li class="tm-paging-item ">
+                                    <a class="mb-2 tm-btn tm-paging-link">...</a>
+                                </li>
+                                <li class="tm-paging-item ">
+                                    <a wire:click="getPage({{$maxPage - 1}})" class="mb-2 tm-btn tm-paging-link">{{$maxPage}}</a>
+                                </li>
+                            @elseif($currentPage >= $maxPage - 3)
+                                <li class="tm-paging-item ">
+                                    <a wire:click="getPage(0)" class="mb-2 tm-btn tm-paging-link">1</a>
+                                </li>
+                                <li class="tm-paging-item ">
+                                    <a class="mb-2 tm-btn tm-paging-link">...</a>
+                                </li>
+                                @for($i = $maxPage - 3; $i < $maxPage; $i++)
+                                    <li class="tm-paging-item {{$currentPage == $i ? 'active' : ''}}">
+                                        <a wire:click="getPage({{$i}})" class="mb-2 tm-btn tm-paging-link">{{$i+1}}</a>
+                                    </li>
+                                @endfor
+                            @endif
                         </ul>
                     </nav>
                 </div>                
-            </div>            
-            <footer class="row tm-row">
-                <hr class="col-12">
-                <div class="col-md-6 col-12 tm-color-gray">
-                    Design: <a rel="nofollow" target="_parent" href="https://templatemo.com" class="tm-external-link">TemplateMo</a>
-                </div>
-                <div class="col-md-6 col-12 tm-color-gray tm-copyright">
-                    Copyright 2020 Xtra Blog Company Co. Ltd.
-                </div>
-            </footer>
+            </div>
         </main>
-    </div>  
+    </div>
+    @livewire('admin.artikel.update-artikel', ['id' => $updateId])
+    @livewire('admin.artikel.create-artikel')
+    @livewire('admin.artikel.create-kategori-artikel')
+    @if($delete !== null)
+    <div class="modal fade show" tabindex="-1" style="display:block;background-color: rgba(0, 0, 0, 0.541);">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Konfirmasi Penghapusan !</h5>
+            </div>
+            <div class="modal-body">
+              <p>Anda yakin ingin menghapus artikel?</p>
+            </div>
+            <div class="modal-footer">
+              <button wire:click="delete(-1)" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button wire:click="confirmDelete" type="button" class="btn btn-danger">Yakin</button>
+            </div>
+          </div>
+        </div>
+    </div>
+    @endif
+    <script>
+        $('#myform').on('keyup keypress', function(e) {
+            var keyCode = e.keyCode || e.which;
+            if (keyCode === 13) { 
+                e.preventDefault();
+                return false;
+            }
+        });
+    </script>
 </div>

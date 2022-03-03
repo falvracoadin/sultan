@@ -11,9 +11,7 @@ class GetBanner extends Component
 
     public function mount()
     {
-        //auth
-
-        $this->banners = KelolaBanner::all();
+        $this->banners = KelolaBanner::all()->toArray();
     }
  
     public function confirmDelete()
@@ -34,6 +32,10 @@ class GetBanner extends Component
 
     public function render()
     {
-        return view('livewire.admin.banner.get-banner');
+        return view('livewire.admin.banner.get-banner')
+            ->extends('layouts.admin',[
+                'banner' => 'active'
+            ])
+            ->slot('slot');
     }
 }

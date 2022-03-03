@@ -6,6 +6,9 @@ use App\Http\Livewire\Admin\Artikel\CreateKategoriArtikel;
 use App\Http\Livewire\Admin\Artikel\GetArtikel;
 use App\Http\Livewire\Admin\Artikel\GetKategoriArtikel;
 use App\Http\Livewire\Admin\Artikel\UpdateArtikel;
+use App\Http\Livewire\Admin\Banner\GetBanner;
+use App\Http\Livewire\Admin\Portofolio\GetPortofolio;
+use App\Http\Livewire\Admin\Staff\GetStaff;
 use App\Http\Livewire\ArtikelController;
 use App\Http\Livewire\CareerController;
 use App\Http\Livewire\ContactUsController;
@@ -15,6 +18,9 @@ use App\Http\Livewire\LatestBriefController;
 use App\Http\Livewire\LatestReportController;
 use App\Http\Livewire\PortofolioController;
 use App\Http\Livewire\WorkingPaperController;
+use App\Models\Artikel;
+use App\Models\KelolaStaff;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
@@ -31,15 +37,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/test', function(){
+    
 });
 
 ROute::prefix('admin')->middleware(['auth'])->group(function(){
     Route::get('/artikel', GetArtikel::class);
-    Route::get('/artikel/create',CreateArtikel::class);
-    Route::get('/artikel/{artikel}', UpdateArtikel::class);
-    
-    Route::get('/kategori-artikel', GetKategoriArtikel::class);
-    Route::get('/kategori-artikel/create', CreateKategoriArtikel::class);
+    Route::get('/portofolio', GetPortofolio::class);
+    Route::get('/staff', GetStaff::class);
+
+    Route::get('/logout', function(){
+        Auth::logout();
+        return redirect('/');
+    });
 });
 
 Route::get('/', HomeController::class);

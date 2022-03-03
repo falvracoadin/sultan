@@ -8,6 +8,8 @@
 	<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet"> <!-- https://fonts.google.com/ -->
     <link href="{{asset('admin/css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('admin/css/templatemo-xtra-blog.css')}}" rel="stylesheet">
+    <script src="js/jquery.min.js"></script>
+    <script src="{{asset('js/tinymce/tinymce.min.js')}}"></script>
     @livewireStyles
     @livewireScripts
 <!--
@@ -30,27 +32,28 @@ https://templatemo.com/tm-553-xtra-blog
             </div>
             <nav class="tm-nav" id="tm-nav">            
                 <ul>
-                    <li class="tm-nav-item {{$artikel ?? ''}}"><a href="index.html" class="tm-nav-link">
+                    <li class="tm-nav-item {{$artikel ?? ''}}"><a href="{{url('/admin/artikel')}}" class="tm-nav-link">
                         Artikel
                     </a></li>
-                    <li class="tm-nav-item" {{$banner ?? ''}}><a href="post.html" class="tm-nav-link">
-                        Banner
-                    </a></li>
-                    <li class="tm-nav-item {{$portofolio ?? ''}}"><a href="about.html" class="tm-nav-link">
+                    <li class="tm-nav-item {{$portofolio ?? ''}}"><a href="{{url('/admin/portofolio')}}" class="tm-nav-link">
                         Portofolio
                     </a></li>
-                    <li class="tm-nav-item {{$servis ?? ''}}"><a href="contact.html" class="tm-nav-link">
+                    <li class="tm-nav-item {{$servis ?? ''}}"><a href="{{url('/admin/servis')}}" class="tm-nav-link">
                         Servis
                     </a></li>
-                    <li class="tm-nav-item {{$staff ?? ''}}"><a href="contact.html" class="tm-nav-link">
+                    <li class="tm-nav-item {{$staff ?? ''}}"><a href="{{url('/admin/staff')}}" class="tm-nav-link">
                         Staff
+                    </a></li>
+                    <li class="tm-nav-item {{$staff ?? ''}}"><a href="{{url('/admin/logout')}}" class="tm-nav-link">
+                        Logout
                     </a></li>
                 </ul>
             </nav>
         </div>
     </header>
+
+    @yield('slot')
     
-    <script src="js/jquery.min.js"></script>
     <script src="js/templatemo-script.js"></script>
 </body>
 </html>
