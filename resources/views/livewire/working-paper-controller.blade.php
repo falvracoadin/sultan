@@ -37,16 +37,16 @@
                             <div class="overlay-inner">
                                 <div class="portfolio-infos">
                                     <span class="meta-category">{{$portofolio['kategori']}}</span>
-                                    <h3 class="portfolio-title"><a href="project-slideshow.html">{{$portofolio['nama_portofolio']}}</a></h3>
+                                    <h3 class="portfolio-title"><a href="{{url('/portofolio/'.$portofolio['id'])}}">{{$portofolio['nama_portofolio']}}</a></h3>
                                 </div>
                                 <div class="portfolio-expand">
-                                    <a class="fancybox" href="images/includes/project1.jpg" title="Visual Admin">
+                                    <a class="fancybox" href="{{asset('storage/'.$portofolio['file'])}}">
                                         <i class="fa fa-expand"></i>
                                     </a>
                                 </div>
                             </div>
                         </div>
-                        <img src="{{asset($portofolio['file'] == null ? 'images/includes/project1.jpg' : $portofolio['file'])}}" alt="{{$portofolio['kategori']}}">
+                        <img src="{{asset($portofolio['file'] == null ? 'images/includes/project1.jpg' : 'storage/'.$portofolio['file'])}}" alt="{{$portofolio['kategori']}}">
 					</div>
 				</div> <!-- /.col-md-4 -->
 				@endforeach

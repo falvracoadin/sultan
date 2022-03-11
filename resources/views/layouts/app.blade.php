@@ -13,9 +13,10 @@
 	<link href="http://fonts.googleapis.com/css?family=Raleway:400,900,800,700,500,200,100,600" rel="stylesheet">
 
 	<!-- Stylesheets -->
-	<link rel="stylesheet" href="{{asset('bootstrap/bootstrap.css')}}">
+	<link rel="stylesheet" href="{{asset('bootstrap/bootstrap.min.css')}}">
 	<link rel="stylesheet" href="{{asset('css/misc.css')}}">
 	<link rel="stylesheet" href="{{asset('css/green-scheme.css')}}">
+	<script src="https://kit.fontawesome.com/1dd3312beb.js" crossorigin="anonymous"></script>
 	
 	<!-- JavaScripts -->
 	<script src="{{asset('js/jquery-1.10.2.min.js')}}"></script>

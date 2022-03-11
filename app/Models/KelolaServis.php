@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class KelolaServis extends Model
 {
     use HasFactory;
+
+    public $fillable = [
+        'nama_servis',
+        'deskripsi'
+    ];
 }

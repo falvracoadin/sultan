@@ -7,6 +7,7 @@ use App\Models\KelolaBanner;
 use App\Models\KelolaServis;
 use App\Models\KelolaStaff;
 use App\Models\Portofolio;
+use App\Models\Visit;
 use Livewire\Component;
 
 class HomeController extends Component
@@ -15,13 +16,15 @@ class HomeController extends Component
             $servis,
             $portofolio,
             $staff,
-            $artikel;
+            $artikel,
+            $visitor;
     public function mount(){
         $this->banner = KelolaBanner::getBannerByApp('home');
         $this->servis = KelolaServis::all()->toArray();
         $this->portofolio = Portofolio::showPortofolio(6);
         $this->staff = KelolaStaff::showStaff(3);
         $this->artikel = Artikel::getNewArtikel(3);
+        $this->visitor = Visit::countVisitor();
     }
 
     public function render()
