@@ -13,9 +13,9 @@ class UpdateArtikel extends Component
     use WithFileUploads;
 
     public $updated_artikel;
-    public $nama_artikel, $deskripsi, $tanggal_terbit, $id_staff, $kategori, $gambar; 
+    public $nama_artikel, $deskripsi, $tanggal_terbit, $id_staff, $kategori, $gambar, $pdf; 
     public $kategoris,$staff;
-    public $file;
+    public $file, $pdfFile;
 
     public $listeners = [
         'showUpdateArtikel',
@@ -34,6 +34,7 @@ class UpdateArtikel extends Component
             $this->id_staff = $artikel->id_staff;
             $this->kategori = $artikel->kategori;
             $this->gambar = $artikel->gambar;
+            $this->pdf = $artikel->pdf;
         }
 
         //get kategori
@@ -51,11 +52,17 @@ class UpdateArtikel extends Component
         $this->id_staff = null;
         $this->kategori = null;
         $this->gambar = null;
-        $this->file = null;
+        if($this->file){
+            Storage::delete('livewire-tmp/'.$this->file->getFileName());
+            $this->file = null;
+        }
+        if($this->pdfFile){
+            Storage::delete('livewire-tmp/'.$this->pdfFile->getFileName());
+        }
     }
 
     public function showUpdateArtikel($id){
-        if($id == -1) return;
+        if($id <= 0) return;
 
         $artikel = Artikel::find($id);
         if(empty($artikel)){
@@ -70,6 +77,7 @@ class UpdateArtikel extends Component
             $this->id_staff = $artikel->id_staff;
             $this->kategori = $artikel->kategori;
             $this->gambar = $artikel->gambar;
+            $this->pdf = $artikel->pdf;
         }
         
         //get kategori
@@ -92,11 +100,12 @@ class UpdateArtikel extends Component
             'tanggal_terbit' => 'required',
             'id_staff' => 'required|numeric',
             'kategori' => 'required|string',
-            'file' => 'mimes:jpeg,jpg|max:2048|nullable'
+            'file' => 'mimes:jpeg,jpg|max:2048|nullable',
+            'pdfFile' => 'mimes:application/pdf|max:2048|nullable'
         ]);
         //upload file section
-        $path = null;
-
+        $path = $this->gambar;
+        $pdfPath = $this->pdf;
         if($this->file){
             $path = "artikel/". $this->file->getFileName();
             Storage::move('livewire-tmp/'.$this->file->getFileName(), 'public/'.$path);
@@ -104,8 +113,13 @@ class UpdateArtikel extends Component
                 Storage::delete('public/'. $this->gambar);
             }
         }
-
-        if($path == null) $path = $this->gambar;
+        if($this->pdfFile){
+            $pdfPath = 'artikel/pdf/'.$this->pdfFile->getFileName();
+            Storage::move('livewire-tmp/'.$this->pdfFile->getFileName(), 'public/'.$pdfPath);
+            if($this->pdf){
+                Storage::delete('public/'.$this->pdf);
+            }
+        }
 
         $this->updated_artikel->update(
             [
@@ -114,7 +128,8 @@ class UpdateArtikel extends Component
                 'tanggal_terbit' => $this->tanggal_terbit,
                 'id_staff' => $this->id_staff,
                 'kategori' => $this->kategori,
-                'gambar' => $path
+                'gambar' => $path,
+                'pdf' => $pdfPath
             ]
         );
 

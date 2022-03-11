@@ -35,6 +35,9 @@ https://templatemo.com/tm-553-xtra-blog
                     <li class="tm-nav-item {{$artikel ?? ''}}"><a href="{{url('/admin/artikel')}}" class="tm-nav-link">
                         Artikel
                     </a></li>
+                    <li class="tm-nav-item {{$banner ?? ''}}"><a href="{{url('/admin/banner')}}" class="tm-nav-link">
+                        Banner
+                    </a></li>
                     <li class="tm-nav-item {{$portofolio ?? ''}}"><a href="{{url('/admin/portofolio')}}" class="tm-nav-link">
                         Portofolio
                     </a></li>
@@ -44,7 +47,15 @@ https://templatemo.com/tm-553-xtra-blog
                     <li class="tm-nav-item {{$staff ?? ''}}"><a href="{{url('/admin/staff')}}" class="tm-nav-link">
                         Staff
                     </a></li>
-                    <li class="tm-nav-item {{$staff ?? ''}}"><a href="{{url('/admin/logout')}}" class="tm-nav-link">
+                    <li class="tm-nav-item {{$contactUs ?? ''}}"><a href="{{url('/admin/contact-us')}}" class="tm-nav-link">
+                        Contact Us
+                    </a></li>
+                    @if(! empty($reset))
+                    <li class="tm-nav-item {{$reset ?? ''}}"><a href="{{url('/ubah-password')}}" class="tm-nav-link">
+                        Reset Password
+                    </a></li>
+                    @endif
+                    <li class="tm-nav-item"><a href="{{url('/admin/logout')}}" class="tm-nav-link">
                         Logout
                     </a></li>
                 </ul>

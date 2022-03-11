@@ -17,13 +17,14 @@ class CreateArtikel extends Component
             $tanggal_terbit_new, 
             $id_staff_new, 
             $kategori_new, 
-            $gambar_new;
+            $gambar_new,
+            $pdf_new;
 
     public $kategoris,$staff;
 
     public $show;
 
-    public $newFile;
+    public $newFile, $newPdfFile;
 
     public $listeners = [
         'showCreatePanel',
@@ -48,14 +49,22 @@ class CreateArtikel extends Component
             'tanggal_terbit_new' => 'required|date',
             'id_staff_new' => 'required|numeric|min:1',
             'kategori_new' => 'required|string|max:50',
-            'newFile' => 'mimes:jpeg,jpg|max:2048|nullable'
+            'newFile' => 'mimes:jpeg,jpg|max:2048|nullable',
+            'pdfFile' => 'mimes:application/pdf|max:2048|nullable'
         ]);
         //upload file section
         $path = null;
+        $pdfPath = null;
         if($this->newFile){
             $path = "artikel/". $this->newFile->getFileName();
             Storage::move('livewire-tmp/'.$this->newFile->getFileName(), 'public/'.$path);
             $this->newFile = null;
+        }
+        if($this->newPdfFile){
+            $pdfPath = 'artikel/pdf/'. $this->newPdfFile->getFileName();
+            Storage::move('livewire-tmp/'.$this->newPdfFile->getFileName(), 'public/'.$path);
+            $this->newPdfFile = null;
+
         }
         
         $artikel = Artikel::create(
@@ -65,7 +74,8 @@ class CreateArtikel extends Component
                 'tanggal_terbit' => $this->tanggal_terbit_new,
                 'id_staff' => $this->id_staff_new,
                 'kategori' => $this->kategori_new,
-                'gambar' => $path 
+                'gambar' => $path ,
+                'pdf' => $pdfPath
             ]
         );
 

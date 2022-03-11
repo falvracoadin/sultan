@@ -8,5 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class KategoriPortofolio extends Model
 {
     use HasFactory;
-
+    public $fillable = [
+        'kategori'
+    ];
 }

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama_servis',50);
             $table->string('deskripsi', 255);
+            $table->boolean('hapus')->default(false);
             $table->timestamps();
         });
     }

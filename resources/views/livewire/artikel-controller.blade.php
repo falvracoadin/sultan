@@ -25,15 +25,15 @@
                             <div class="post-blog">
                                 <div class="blog-image">
                                     <a href="{{url('/artikel/'.$article['id'])}}">
-                                        <img src="{{asset($article['gambar'] == null ? 'images/includes/blog1.jpg' : $article['gambar'])}}" alt="">
+                                        <img src="{{asset($article['gambar'] == null ? 'images/includes/blog1.jpg' : 'storage/'.$article['gambar'])}}" alt="">
                                     </a>
                                 </div> <!-- /.blog-image -->
                                 <div class="blog-content">
                                     <span class="meta-date"><a href="#">{{date('d M Y', strtotime($article['tanggal_terbit']))}}</a></span>
                                     <span class="meta-comments"><a href="#">{{array_key_exists($ind, $numComment) ? $numComment[$ind]['jumlah'] : 0}} Comments</a></span>
                                     <span class="meta-author"><a href="#">{{$penulis[$ind]['nama_staff']}}</a></span>
-                                    <h3><a href="blog-single.html">{{$article['nama_artikel']}}</a></h3>
-                                    <p>{{substr($article['deskripsi'],0,100)}}<a href="{{url('/artikel/'.$article['id'])}}">Continue Reading...</a></p>
+                                    <h3><a href="{{url('/artikel/'.$article['id'])}}">{{$article['nama_artikel']}}</a></h3>
+                                    <p>{{substr($article['nama_artikel'],0,100)}}<a href="{{url('/artikel/'.$article['id'])}}">Continue Reading...</a></p>
                                 </div> <!-- /.blog-content -->
                             </div> <!-- /.post-blog -->
                         @endforeach
@@ -59,7 +59,7 @@
                         @foreach($recentArticles as $arc)
 						<div class="last-post clearfix">
 							<div class="thumb pull-left">
-								<a href="#"><img src="{{asset($article['gambar'] == null ? 'images/includes/blogthumb1.jpg' : $article['gambar'])}}" alt=""></a>
+								<a href="#"><img src="{{asset($arc['gambar'] == null ? 'images/includes/blogthumb1.jpg' : $arc['gambar'])}}" alt=""></a>
 							</div>
 							<div class="content">
 								<span>{{date('d M Y', strtotime($arc['tanggal_terbit']))}}</span>

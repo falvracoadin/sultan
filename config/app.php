@@ -193,4 +193,15 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // ...
     ])->toArray(),
+
+    'nama_app' => [
+        'home',
+        'portofolio',
+        'working-paper',
+        'latest-brief',
+        'latest-report',
+        'artikel',
+        'career',
+        'contact'
+    ]
 ];

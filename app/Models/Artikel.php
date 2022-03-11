@@ -15,7 +15,8 @@ class Artikel extends Model
         'tanggal_terbit',
         'id_staff',
         'kategori',
-        'gambar'
+        'gambar',
+        'pdf'
     ];
 
     public static function getNewArtikel($size){

@@ -29,4 +29,11 @@ class Portofolio extends Model
             ->toArray();
     }
 
+    public static function getRelatedPortofolio($kategori, $tipe, $limit){
+        return self::where('kategori', $kategori)
+            ->where('tipe', $tipe)
+            ->limit($limit)
+            ->get()->toArray();
+    }
+
 }

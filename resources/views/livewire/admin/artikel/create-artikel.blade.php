@@ -41,6 +41,11 @@
               <button class="btn btn-outline-secondary" type="button" id="new5">Gambar Artikel</button>
               <input wire:model="newFile" name="file" type="file" class="form-control" id="inputGroupFile03" aria-describedby="inputGroupFileAddon03" aria-label="Upload">
             </div>
+            <div class="input-group mb-3">
+              @if($pdf_new)<p style="display: inline-block;width: 100%;">Current pdf : <a href="{{asset("storage/$pdf_file")}}">view</a></p><br>@endif
+              <button class="btn btn-outline-secondary" type="button" id="new5">PDF Artikel</button>
+              <input wire:model="newPdfFile" name="file" type="file" class="form-control" id="inputGroupFile03" aria-describedby="inputGroupFileAddon03" aria-label="Upload">
+            </div>
   
           </div>
           
