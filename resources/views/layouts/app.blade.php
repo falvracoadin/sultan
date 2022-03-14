@@ -14,6 +14,7 @@
 
 	<!-- Stylesheets -->
 	<link rel="stylesheet" href="{{asset('bootstrap/bootstrap.min.css')}}">
+	<link rel="stylesheet" href="{{asset('bootstrap/bootstrap.css')}}">
 	<link rel="stylesheet" href="{{asset('css/misc.css')}}">
 	<link rel="stylesheet" href="{{asset('css/green-scheme.css')}}">
 	<script src="https://kit.fontawesome.com/1dd3312beb.js" crossorigin="anonymous"></script>

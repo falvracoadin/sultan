@@ -50,7 +50,7 @@ class CreateArtikel extends Component
             'id_staff_new' => 'required|numeric|min:1',
             'kategori_new' => 'required|string|max:50',
             'newFile' => 'mimes:jpeg,jpg|max:2048|nullable',
-            'pdfFile' => 'mimes:application/pdf|max:2048|nullable'
+            'pdfFile' => 'max:2048|nullable'
         ]);
         //upload file section
         $path = null;

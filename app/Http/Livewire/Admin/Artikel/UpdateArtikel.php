@@ -101,7 +101,7 @@ class UpdateArtikel extends Component
             'id_staff' => 'required|numeric',
             'kategori' => 'required|string',
             'file' => 'mimes:jpeg,jpg|max:2048|nullable',
-            'pdfFile' => 'mimes:application/pdf|max:2048|nullable'
+            'pdfFile' => 'max:2048|nullable'
         ]);
         //upload file section
         $path = $this->gambar;
