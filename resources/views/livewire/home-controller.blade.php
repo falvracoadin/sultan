@@ -14,7 +14,7 @@
         }
 
         .counter i {
-            color: #71ac71;
+            color: #97a488;
         }
 
         .counter h4 {
