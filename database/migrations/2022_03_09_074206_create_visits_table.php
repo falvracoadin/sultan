@@ -19,6 +19,7 @@ return new class extends Migration
             $table->smallInteger('tahun');
             $table->tinyInteger('bulan');
             $table->tinyInteger('tanggal');
+            $table->string('kode',5);
         });
     }
 

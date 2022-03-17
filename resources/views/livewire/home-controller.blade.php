@@ -1,31 +1,51 @@
 <div>
-	<style>
-		.counter-container{
-			border-top: 1px solid rgba(83, 83, 83, 0.279);
-			padding-top: 40px;
-		}
-		.counter{
-			width: 200px;
-			background-color: rgba(223, 223, 223, 0.116);
-			height: 100px;
-			display: inline-block;
-			border-radius: 25px 25px 60px 60px;
-		}
-		.counter i{
-			color: #71ac71;
-		}
-		.counter h4{
-			margin-top: 20px;
-			font-size: 15px;
-			color: rgba(68, 68, 68, 0.578);
-			font-weight: bold;
-			font-family: Verdana, Geneva, Tahoma, sans-serif
-		}
-		.count{
-			color: #99a799;
-			font-size: 20px;
-		}
-	</style>
+    <style>
+        .counter-container {
+            border-top: 1px solid rgba(83, 83, 83, 0.279);
+            padding-top: 40px;
+        }
+
+        .counter {
+            width: 200px;
+            background-color: rgba(223, 223, 223, 0.116);
+            height: 100px;
+            display: inline-block;
+            border-radius: 25px 25px 60px 60px;
+        }
+
+        .counter i {
+            color: #71ac71;
+        }
+
+        .counter h4 {
+            margin-top: 20px;
+            font-size: 15px;
+            color: rgba(68, 68, 68, 0.578);
+            font-weight: bold;
+            font-family: Verdana, Geneva, Tahoma, sans-serif
+        }
+
+        .count {
+            color: #99a799;
+            font-size: 20px;
+        }
+
+        .flag-container {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            width: 130px;
+            height: 140px;
+            padding: 10px 20px;
+            background-color: rgba(0, 0, 0, 0.219);
+            border-radius: 20px;
+        }
+        .country-count{
+            font-family: "Raleway", sans-serif;
+            font-weight: bold;
+            font-size: 24px;
+        }
+    </style>
     <section id="homeIntro" class="parallax first-widget">
         <div class="parallax-overlay">
             <div class="container home-intro-content">
@@ -74,57 +94,58 @@
         </div> <!-- /.container -->
     </section> <!-- /.services -->
 
-	<section class="light-content counter-container">
-		<div class="container">
-			<div class="d-flex p-2 flex-row justify-content-around">
-				<div class="counter">
-					<div class="row">
-						<div class="col-12">
-							<div class="d-flex justify-content-center">
-								<i class="fa-solid fa-person fa-2xl"></i>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-12">
-							<div class="d-flex justify-content-center">
-								<h4>Pengunjung Harian</h4>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-12">
-							<div class="d-flex justify-content-center">
-								<p class="count">{{$visitor['day']}}</p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="counter"><div class="row">
-					<div class="col-12">
-						<div class="d-flex justify-content-center">
-							<i class="fa-solid fa-people-arrows-left-right fa-2xl"></i>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-12">
-						<div class="d-flex justify-content-center">
-							<h4>Pengunjung Bulanan</h4>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-12">
-						<div class="d-flex justify-content-center">
-							<p class="count">{{$visitor['month']}}</p>
-						</div>
-					</div>
-				</div>
-				</div>
-			</div>
-		</div>
-	</section>
+    <section class="light-content counter-container">
+        <div class="container">
+            <div class="d-flex p-2 flex-row justify-content-around">
+                <div class="counter">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="d-flex justify-content-center">
+                                <i class="fa-solid fa-person fa-2xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="d-flex justify-content-center">
+                                <h4>Pengunjung Harian</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="d-flex justify-content-center">
+                                <p class="count">{{ $visitor['day'] }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="counter">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="d-flex justify-content-center">
+                                <i class="fa-solid fa-people-arrows-left-right fa-2xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="d-flex justify-content-center">
+                                <h4>Pengunjung Bulanan</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="d-flex justify-content-center">
+                                <p class="count">{{ $visitor['month'] }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <section class="dark-content portfolio">
         <div class="container">
@@ -147,7 +168,8 @@
                                 <div class="portfolio-infos">
                                     <span class="meta-category">{{ $por['nama_portofolio'] }}</span>
                                     <h3 class="portfolio-title"><a
-                                            href="{{ url('/portofolio/' . $por['id']) }}">{{ $por['deskripsi'] }}</a></h3>
+                                            href="{{ url('/portofolio/' . $por['id']) }}">{{ $por['deskripsi'] }}</a>
+                                    </h3>
                                 </div>
                                 <div class="portfolio-expand">
                                     <a class="fancybox" href="{{ asset('storage/' . $por['file']) }}">
@@ -267,8 +289,16 @@
             </div> <!-- /.container -->
         </div> <!-- /.parallax-overlay -->
     </section> <!-- /#blogPosts -->
-	<script>
-		const counter = $('.counter-container');
-		const doc = $(document);
-	</script>
+    <div class="flag-container">
+        @foreach($countryVisitor as $cv)
+            <div class="row mt-2">
+                <div class="col-4">
+                    <img src="https://flagcdn.com/36x27/{{strtolower($cv['kode'])}}.png" width="36" height="27" alt="{{$cv['kode']}}">
+                </div>
+                <div class="col-7 country-count">
+                    : {{$cv['jumlah']}}
+                </div>
+            </div>
+        @endforeach
+    </div>
 </div>

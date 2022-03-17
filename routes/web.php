@@ -32,73 +32,70 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-if(!session()->has('status_ip')){
-    $ip = request()->ip();
-    $status = Visit::visit($ip);
-    if($status){
-        session()->put('status_ip', true);
-    }
-}
 
-Route::get('/test', function(){
-});
-Route::get('/admin',function(){
-    return redirect('/login');
-});
-Route::prefix('admin')->middleware(['auth'])->group(function(){
-    Route::get('/artikel', GetArtikel::class);
-    Route::get('/banner', GetBanner::class);
-    Route::get('/portofolio', GetPortofolio::class);
-    Route::get('/staff', GetStaff::class);
-    Route::get('/servis', GetServis::class);
-    Route::get('/contact-us', GetContatctUs::class);
+Route::middleware(['visitable'])->group(function () {
 
-    Route::get('/logout', function(){
-        Auth::logout();
-        session()->invalidate();
-        session()->regenerateToken();
+    Route::get('/test', function () {
+        dd(Visit::countVisitorByCountry());
+    });
+    Route::get('/admin', function () {
+        return redirect('/login');
+    });
+    Route::prefix('admin')->middleware(['auth'])->group(function () {
+        Route::get('/artikel', GetArtikel::class);
+        Route::get('/banner', GetBanner::class);
+        Route::get('/portofolio', GetPortofolio::class);
+        Route::get('/staff', GetStaff::class);
+        Route::get('/servis', GetServis::class);
+        Route::get('/contact-us', GetContatctUs::class);
+
+        Route::get('/logout', function () {
+            Auth::logout();
+            session()->invalidate();
+            session()->regenerateToken();
+            return redirect('/');
+        });
+    });
+
+
+    Route::get('/ubah-password', ResetPassword::class)
+        ->middleware(['guest']);
+
+    Route::get('/ubah-password/{token}', ResetPassword::class)
+        ->middleware(['guest']);
+
+    Route::get('/', HomeController::class);
+
+    Route::get('/portofolio', PortofolioController::class);
+
+    Route::get('/portofolio/{portofolio}', DetailPortofolio::class);
+
+    Route::get('/working-paper', WorkingPaperController::class);
+
+    Route::get('/latest-brief', LatestBriefController::class);
+
+    Route::get('/latest-report', LatestReportController::class);
+
+    Route::get('/artikel', ArtikelController::class);
+
+    Route::get('/artikel/cat/{category}', ArtikelController::class);
+
+    Route::get('/artikel/{artikel}', DetailArtikel::class);
+
+    Route::get('/career', CareerController::class);
+
+    Route::get('/contact', ContactUsController::class);
+
+    Route::post('/contact', ContactUsController::class);
+
+    Route::get('/login', [LoginController::class, 'index'])
+        ->name('login')
+        ->middleware('guest');
+
+    Route::post('/login', [LoginController::class, 'login'])
+        ->middleware('guest');
+
+    Route::fallback(function () {
         return redirect('/');
     });
 });
-
-
-Route::get('/ubah-password',ResetPassword::class)
-    ->middleware(['guest']);
-
-Route::get('/ubah-password/{token}', ResetPassword::class)
-    ->middleware(['guest']);
-
-Route::get('/', HomeController::class);
-
-Route::get('/portofolio', PortofolioController::class);
-
-Route::get('/portofolio/{portofolio}', DetailPortofolio::class);
-
-Route::get('/working-paper', WorkingPaperController::class);
-
-Route::get('/latest-brief', LatestBriefController::class);
-
-Route::get('/latest-report', LatestReportController::class);
-
-Route::get('/artikel', ArtikelController::class);
-
-Route::get('/artikel/cat/{category}', ArtikelController::class);
-
-Route::get('/artikel/{artikel}', DetailArtikel::class);
-
-Route::get('/career', CareerController::class);
-
-Route::get('/contact', ContactUsController::class);
-
-Route::post('/contact', ContactUsController::class);
-
-Route::get('/login', [LoginController::class, 'index'])
-    ->name('login')
-    ->middleware('guest');
-
-Route::post('/login', [LoginController::class, 'login'])
-    ->middleware('guest');
-
-Route::fallback(function(){
-    return redirect('/');
-}); 

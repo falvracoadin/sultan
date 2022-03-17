@@ -17,7 +17,8 @@ class HomeController extends Component
             $portofolio,
             $staff,
             $artikel,
-            $visitor;
+            $visitor,
+            $countryVisitor;
     public function mount(){
         $this->banner = KelolaBanner::getBannerByApp('home');
         $this->servis = KelolaServis::all()->toArray();
@@ -25,6 +26,7 @@ class HomeController extends Component
         $this->staff = KelolaStaff::showStaff(3);
         $this->artikel = Artikel::getNewArtikel(3);
         $this->visitor = Visit::countVisitor();
+        $this->countryVisitor = Visit::countVisitorByCountry();
     }
 
     public function render()

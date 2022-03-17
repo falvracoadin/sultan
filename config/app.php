@@ -176,7 +176,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
+        Stevebauman\Location\LocationServiceProvider::class,
     ],
 
     /*
@@ -192,6 +192,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // ...
+        'location' => 'Stevebauman\Location\Facades\Location',
     ])->toArray(),
 
     'nama_app' => [
