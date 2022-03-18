@@ -110,7 +110,7 @@
 			</div> <!-- /.row -->
 			<div class="row">
 				<div class="col-md-12">
-					<p class="copyright-text">Copyright &copy; 2022 Nama</p>
+					<p class="copyright-text">{{App\Models\Footer::getContent()}}</p>
 				</div> <!-- /.col-md-12 -->
 			</div> <!-- /.row -->
 		</div> <!-- /.container -->

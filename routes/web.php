@@ -4,6 +4,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Livewire\Admin\Artikel\GetArtikel;
 use App\Http\Livewire\Admin\Auth\ResetPassword;
 use App\Http\Livewire\Admin\Banner\GetBanner;
+use App\Http\Livewire\Admin\Footer\UpdateFooter;
 use App\Http\Livewire\Admin\Portofolio\GetPortofolio;
 use App\Http\Livewire\Admin\Servis\GetServis;
 use App\Http\Livewire\Admin\Staff\GetStaff;
@@ -48,6 +49,7 @@ Route::middleware(['visitable'])->group(function () {
         Route::get('/staff', GetStaff::class);
         Route::get('/servis', GetServis::class);
         Route::get('/contact-us', GetContatctUs::class);
+        Route::get('/footer', UpdateFooter::class);
 
         Route::get('/logout', function () {
             Auth::logout();

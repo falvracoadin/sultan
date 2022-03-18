@@ -11,5 +11,11 @@ class Footer extends Model
     protected $fillable  = [
       'konten'
     ];
+
+    public static function getContent(){
+      return self::where('id', '>', 0)
+        ->first()
+        ->konten;
+    }
 }
 

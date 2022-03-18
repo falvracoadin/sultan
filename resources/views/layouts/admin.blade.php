@@ -50,6 +50,9 @@ https://templatemo.com/tm-553-xtra-blog
                     <li class="tm-nav-item {{$contactUs ?? ''}}"><a href="{{url('/admin/contact-us')}}" class="tm-nav-link">
                         Contact Us
                     </a></li>
+                    <li class="tm-nav-item {{$footer ?? ''}}"><a href="{{url('/admin/footer')}}" class="tm-nav-link">
+                        Footer
+                    </a></li>
                     @if(! empty($reset))
                     <li class="tm-nav-item {{$reset ?? ''}}"><a href="{{url('/ubah-password')}}" class="tm-nav-link">
                         Reset Password
